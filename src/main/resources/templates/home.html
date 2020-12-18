@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+</head>
+<body>
+
+    <h1>Welcome!</h1>
+    <h3 th:text="${welcomeMessage}">WelcomePlaceholder</h3>
+    <h3 th:if="${welcomeMessage} == null" th:text="'No welcome message for you, actually.'">NoWelcomePlaceholder</h3>
+
+    <h1>Message Form!</h1>
+    <form th:object="${newMessage}" th:action="@{/home}" method="POST">
+        <input th:field="*{text}" type="text">
+        <input type="submit">
+    </form>
+    <h3 th:each="msg : ${greetings}" th:text="${msg}" th:unless="${msg.contains('goodby')}">Hello, homepage!</h3>
+
+    <h1>Animal Form!</h1>
+    <form th:object="${newAnimal}" th:action="@{/animal}" method="POST">
+        <label for="animalText">Enter an Animal: </label>
+        <input th:field="*{animal}" type="text" id="animalText" name="animalText">
+        <label for="adjective">Enter an Adjective: </label>
+        <input th:field="*{adjective}" type="text" id="adjective" name="adjective">
+        <input type="submit">
+    </form>
+    <h3 th:unless="${#lists.size(greetings) &gt; 5}" th:each="msg : ${greetings}" th:text="${msg}">Hello, homepage!</h3>
+    <h4 th:if="${#lists.size(greetings) &gt; 5}">I think that's enough</h4>
+</body>
+</html>

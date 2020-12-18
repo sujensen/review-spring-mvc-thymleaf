@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Animal Page</title>
+</head>
+<body>
+    <h1 th:unless="${animalForm.animal} == null">You chose a great animal!</h1>
+    <h1 th:if="${animalForm.animal} == null">Go to the home page to submit the animal form!</h1>
+
+    <p th:text="${animalForm.animal} + ', ' + ${animalForm.adjective}">animalPlaceholder</p>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatty chat</title>
+</head>
+<body>
+
+<form th:object="${chatForm}" th:action="@{'/chat'}" method="POST">
+    <label for="username">Username: </label>
+    <input th:field="*{username}" id="username" type="text">
+
+    <label for="messageText">Message text: </label>
+    <input th:field="*{messageText}" id="messageText" type="text">
+
+    <label for="messageType">Message type? </label>
+    <select th:field="*{messageType}" id="messageType">
+        <!-- don't want to hardcode the message types in the template: that is business logic
+            <option th:value="'Say'">Say</option>
+            <option th:value="'Shout'">Shout</option>
+            <option th:value="'Whisper'">Whisper</option> -->
+        <option th:each="opt : *{messageTypeOptions}" th:value="${opt}" th:text="${opt}">optionPlaceholder</option>
+    </select>
+
+    <input type="submit">
+</form>
+
+<h1>Chat history:</h1>
+<div th:each="ch : ${getTheChatHistory}">
+    <p>
+        <span th:text="${ch.username}">userPlaceholder</span>:
+        <span th:switch="${ch.messageType}">
+            <span th:case="'Shout'" th:text="${#strings.toUpperCase(ch.messageText)}">shoutPlaceholder</span>
+            <span th:case="'Whisper'" th:text="${#strings.toLowerCase(ch.messageText)}">whisperPlaceholder</span>
+            <span th:case="'Say'" th:text="${ch.messageText}">sayPlaceholder</span>
+        </span>
+    </p>
+</div>
+
+<!-- This is better, to not include the format of each line of the chat history in the html.
+    Instead, that is business logic. Change how the chat history looks, without changing the html template.-->
+<h1>Pretty chat history:</h1>
+<p>
+    <span th:each="prettyCh : ${getThePrettyChatHistory}" th:utext="${prettyCh}">prettyChatPlaceholder</span>
+</p>
+</body>
+</html>
