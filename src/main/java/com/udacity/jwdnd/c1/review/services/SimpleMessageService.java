@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.c1.review.Services;
+package com.udacity.jwdnd.c1.review.services;
 
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.udacity.jwdnd.c1.review.Controller;
+package com.udacity.jwdnd.c1.review.controller;
 
-import com.udacity.jwdnd.c1.review.Data.AnimalForm;
+import com.udacity.jwdnd.c1.review.data.AnimalForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

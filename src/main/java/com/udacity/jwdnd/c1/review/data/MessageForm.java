@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.c1.review.Data;
+package com.udacity.jwdnd.c1.review.data;
 
 /*
 Class to store the form data from our request (in the home page view).

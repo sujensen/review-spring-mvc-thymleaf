@@ -1,6 +1,6 @@
-package com.udacity.jwdnd.c1.review.Data;
+package com.udacity.jwdnd.c1.review.data;
 
-import com.udacity.jwdnd.c1.review.Services.ChatHistoryService;
+import com.udacity.jwdnd.c1.review.services.ChatHistoryService;
 
 import java.util.List;
 

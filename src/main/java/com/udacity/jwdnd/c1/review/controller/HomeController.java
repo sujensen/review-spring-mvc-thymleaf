@@ -1,8 +1,8 @@
-package com.udacity.jwdnd.c1.review.Controller;
+package com.udacity.jwdnd.c1.review.controller;
 
-import com.udacity.jwdnd.c1.review.Data.AnimalForm;
-import com.udacity.jwdnd.c1.review.Data.MessageForm;
-import com.udacity.jwdnd.c1.review.Services.MessageListService;
+import com.udacity.jwdnd.c1.review.data.AnimalForm;
+import com.udacity.jwdnd.c1.review.data.MessageForm;
+import com.udacity.jwdnd.c1.review.services.MessageListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

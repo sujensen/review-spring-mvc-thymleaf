@@ -1,7 +1,7 @@
-package com.udacity.jwdnd.c1.review.Controller;
+package com.udacity.jwdnd.c1.review.controller;
 
-import com.udacity.jwdnd.c1.review.Data.ChatForm;
-import com.udacity.jwdnd.c1.review.Services.ChatHistoryService;
+import com.udacity.jwdnd.c1.review.data.ChatForm;
+import com.udacity.jwdnd.c1.review.services.ChatHistoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

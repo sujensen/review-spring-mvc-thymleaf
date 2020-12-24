@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.c1.review.Data;
+package com.udacity.jwdnd.c1.review.data;
 
 public class AnimalForm {
 
