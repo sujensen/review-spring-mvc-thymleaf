@@ -7,9 +7,6 @@
 <body>
 
 <form th:object="${chatForm}" th:action="@{'/chat'}" method="POST">
-    <label for="username">Username: </label>
-    <input th:field="*{username}" id="username" type="text">
-
     <label for="messageText">Message text: </label>
     <input th:field="*{messageText}" id="messageText" type="text">
 
@@ -43,5 +40,11 @@
 <p>
     <span th:each="prettyCh : ${getThePrettyChatHistory}" th:utext="${prettyCh}">prettyChatPlaceholder</span>
 </p>
+
+<form action="/logout" method="POST">
+    <!--<input type="submit">-->
+    <button type="submit">Logout</button>
+</form>
+
 </body>
 </html>

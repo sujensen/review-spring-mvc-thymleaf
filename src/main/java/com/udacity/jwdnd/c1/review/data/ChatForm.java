@@ -6,11 +6,14 @@ import java.util.List;
 
 public class ChatForm {
     String username;
+    Integer messageId;
     String messageText;
     String messageType;
     List<String> messageTypeOptions;
 
-
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
+    }
     public void setUsername(String username) {
         this.username = username;
     }
@@ -20,16 +23,21 @@ public class ChatForm {
     public void setMessageType(String messageType) {
         this.messageType = messageType;
     }
-    public void setMessageTypeOptions(List<String> messageTypeOptions) { this.messageTypeOptions = messageTypeOptions; }
-
-    public String getUsername() {
-        return username;
+    public void setMessageTypeOptions(List<String> messageTypeOptions) {
+        this.messageTypeOptions = messageTypeOptions;
     }
+
+    public Integer getMessageId() {
+        return messageId;
+    }
+    public String getUsername() { return username; }
     public String getMessageText() {
         return messageText;
     }
     public String getMessageType() {
         return messageType;
     }
-    public List<String> getMessageTypeOptions() { return ChatHistoryService.messageTypeOptions; }
+    public List<String> getMessageTypeOptions() {
+        return ChatHistoryService.messageTypeOptions;
+    }
 }
