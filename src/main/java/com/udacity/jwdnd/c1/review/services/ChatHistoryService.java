@@ -1,5 +1,8 @@
 package com.udacity.jwdnd.c1.review.services;
 
+import com.udacity.jwdnd.c1.review.data.ChatForm;
+import com.udacity.jwdnd.c1.review.data.User;
+import com.udacity.jwdnd.c1.review.mapper.ChatMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -8,18 +11,18 @@ import java.util.*;
 @Service
 public class ChatHistoryService {
 
-    List<Map<String, String>> chatHistory;
     List<String> bannedWords;
     // Everytime we return the html, including the ChatForm, for the chat page, the messageTypeOptions in the form
     // never change, so we can make this static, and public to be accessible to the ChatForm.
     public static List<String> messageTypeOptions;
+    private final ChatMapper chatMapper;
 
-    @PostConstruct
-    public void postConstruct() {
+    // Write your own constructor, because we need to declare the dependency on the ChatMapper
+    public ChatHistoryService(ChatMapper chatMapper) {
         System.out.println("...in PostConstruct for ChatHistoryService");
-        chatHistory = new ArrayList<Map<String, String>>();
         bannedWords = Arrays.asList(new String[] {"fuck", "shit", "poop"});
         messageTypeOptions = Arrays.asList(new String[] {"Say", "Shout", "Whisper"});
+        this.chatMapper = chatMapper;
     }
 
     public String replaceChar(String s, int index, char ch) {
@@ -31,12 +34,10 @@ public class ChatHistoryService {
     /*
      Business logic lives in the service. So, it's good to remove banned words here, so they are never saved at all.
      */
-    public void addChat(String un, String mtxt, String mtype) {
-        Map<String, String> chat = new HashMap<String, String>();
-        chat.put("username", un);
+    public Integer addChat(ChatForm chatForm) {
 
-        String cleanMtxt = new String(mtxt);
-        String lowerMtxt = new String(mtxt.toLowerCase(Locale.ROOT));
+        String cleanMtxt = new String(chatForm.getMessageText());
+        String lowerMtxt = new String(chatForm.getMessageText().toLowerCase(Locale.ROOT));
         for (String bw : bannedWords) {
             if (lowerMtxt.contains(bw)) {
                 int start = lowerMtxt.indexOf(bw);
@@ -46,13 +47,13 @@ public class ChatHistoryService {
                 }
             }
         }
-        chat.put("messageText", cleanMtxt);
-        chat.put("messageType", mtype);
-        chatHistory.add(chat);
+        System.out.println("....cleanMtxt = " + cleanMtxt);
+        chatForm.setMessageText(cleanMtxt);
+        return chatMapper.insertChat(chatForm);
     }
 
-    public List<Map<String, String>> getChatHistory() {
-        return chatHistory;
+    public List<ChatForm> getChatHistory() {
+        return chatMapper.getAllChats();
     }
 
     /*
@@ -60,10 +61,11 @@ public class ChatHistoryService {
      */
     public List<String> getPrettyChatHistory() {
         List<String> prettyChatHistory = new ArrayList<String>();
-        for (Map<String, String> origChat : chatHistory) {
-            String uName = origChat.get("username");
-            String mTxt = origChat.get("messageText");
-            String mType = origChat.get("messageType");
+        List<ChatForm> chatHistory = chatMapper.getAllChats();
+        for (ChatForm origChat : chatHistory) {
+            String uName = origChat.getUsername();
+            String mTxt = origChat.getMessageText();
+            String mType = origChat.getMessageType();
             String prettyMTxt;
             switch (mType) {
                 case "Say": prettyMTxt = new String(mTxt);
