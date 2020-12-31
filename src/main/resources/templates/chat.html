@@ -19,7 +19,7 @@
         <option th:each="opt : *{messageTypeOptions}" th:value="${opt}" th:text="${opt}">optionPlaceholder</option>
     </select>
 
-    <input type="submit">
+    <input id="submit-button" type="submit">
 </form>
 
 <h1>Chat history:</h1>
@@ -38,12 +38,12 @@
     Instead, that is business logic. Change how the chat history looks, without changing the html template.-->
 <h1>Pretty chat history:</h1>
 <p>
-    <span th:each="prettyCh : ${getThePrettyChatHistory}" th:utext="${prettyCh}">prettyChatPlaceholder</span>
+    <span id="prettyHistoryId" th:each="prettyCh : ${getThePrettyChatHistory}" th:utext="${prettyCh}">prettyChatPlaceholder</span>
 </p>
 
 <form action="/logout" method="POST">
     <!--<input type="submit">-->
-    <button type="submit">Logout</button>
+    <button id="logout-button" type="submit">Logout</button>
 </form>
 
 </body>
